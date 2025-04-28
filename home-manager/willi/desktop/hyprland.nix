@@ -46,8 +46,7 @@ in {
         "hypridle"
       ];
       input = {
-        "kb_layout" = "us";
-        "kb_variant" = "colemak";
+        "kb_layout" = "de";
         touchpad = {
           disable_while_typing = false;
         };
@@ -73,7 +72,7 @@ in {
           "$mod, F11, fullscreen"
           "$mod&Shift, F, togglefloating"
           "$mod&Shift, M, exit"
-          "$mod, Space, exec, rofi -show drun"
+	  "$mod, Space, exec, rofi -show drun"
           "$mod, Q, killactive"
           "$mod, F, exec, qutebrowser"
           "$mod, period, exec, emote"

@@ -15,6 +15,7 @@
     # You can also split up your configuration and import pieces of it here:
     # ./nvim.nix
     ./desktop/hyprland.nix
+    ./nix-index.nix
   ];
 
   nixpkgs = {
@@ -47,11 +48,34 @@
 
   # Add stuff for your user as you see fit:
   # programs.neovim.enable = true;
-  # home.packages = with pkgs; [ steam ];
+  home.packages = with pkgs; [
+    vesktop
+    comma
+    spotify
+    font-awesome
+    localsend
+    nemo-with-extensions
+    nemo-fileroller
+    wine
+    fira-code
+    fira-code-symbols
+    vscode
+    qutebrowser
+  ];
 
   # Enable home-manager and git
   programs.home-manager.enable = true;
   programs.git.enable = true;
+
+  fonts = {
+    fontconfig = {
+      enable = true;
+      defaultFonts = {
+        serif = ["Fira Code"];
+        monospace = ["Fira Code"];
+      };
+    };
+  };
 
   # Nicely reload system units when changing configs
   systemd.user.startServices = "sd-switch";

@@ -10,6 +10,7 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
+    nixvim.url = "github:derhalbgrieche/nixvim";
   };
 
   outputs = {
@@ -21,13 +22,21 @@
   } @ inputs: let
     inherit (self) outputs;
   in {
+    nixosModule = {
+      nixpkgs.overlays = [
+        # Override default neovim with the one from nixvim flake
+        (final: prev: {
+          neovim = inputs.nixvim.packages.${prev.system}.default;
+        })
+      ];
+    };
     # NixOS configuration entrypoint
     # Available through 'nixos-rebuild --flake .#your-hostname'
     nixosConfigurations = {
       nixos = nixpkgs.lib.nixosSystem {
         specialArgs = {inherit inputs outputs;};
         # > Our main nixos configuration file <
-        modules = [./nixos/configuration.nix nixos-hardware.nixosModules.lenovo-ideapad-slim-5];
+        modules = [./nixos/configuration.nix nixos-hardware.nixosModules.lenovo-ideapad-slim-5 self.nixosModule];
       };
     };
 
