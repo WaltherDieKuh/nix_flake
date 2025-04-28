@@ -93,10 +93,6 @@
   programs.firefox.enable = true;
 
   # install hyprland
-  programs.hyprland = {
-  	enable = true;
-	xwayland.enable = true;
-  };
   
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -109,6 +105,7 @@
   kitty
   waybar
   wofi
+  home-manager
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
